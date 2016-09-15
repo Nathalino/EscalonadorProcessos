@@ -1,2 +1,2 @@
-# EscalonadorProcessos
+# Escalonador Processos
 Escalador de Processos

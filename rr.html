@@ -1,0 +1,65 @@
+<!DOCTYPE>
+<html lang="PT-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Round Robin - Simulador de Escalonador de Processos</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src=""></script>
+    </head>
+    
+    <body>
+        
+        <header>
+            <h1>Sistemas Operacionais</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html"> < Retornar para página principal</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section>
+            <article>
+                <h2>Painel do usuário</h2>
+                <p>Insira os dados para execuçao do escalador</p>
+                <form action="">
+                    <ul>
+                        <li><label for="nProcessadores">Número de processadores:</label></li>
+                        <li><input type="number" name="nProcessadores" id="nProcessadores"></li>
+                        <li><label for="nProcessos">Número de processos iniciais:</label></li>
+                        <li><input type="number" name="nProcessos" id="nProcessos"></li>
+                        <li><label for="quantum">Quantum:</label></li>
+                        <li><input type="number" name="quantum" id="quantum"></li>
+                        <li>
+                            <input type="button" value="Iniciar" onclick="">
+                            <input type="button" value="Adicionar processo" onclick="">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+        </section>
+        
+        <div id="tabelaStatus">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Identificador do processo</th>
+                        <th>Tempo total de execução</th>
+                        <th>Tempo já processado</th>
+                        <th>Estado do processo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nenhum processo simulando!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <footer>
+            <p>Todos os direitos reservado aos membros da equipe: Nathalino Pachêco Britto e Breno Negreiros Ferreira</p>
+        </footer>
+        
+    </body>
+</html>

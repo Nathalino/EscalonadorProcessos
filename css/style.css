@@ -1,0 +1,144 @@
+@import 'https://fonts.googleapis.com/css?family=Baloo+Tamma';
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+body{
+    background: #fff url(../img/bg/bg.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-attachment: fixed;
+}
+
+header, section, footer{
+    text-align: center;
+    display: block;
+    
+    width: 600px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+header h1{
+    font-family: 'Baloo Tamma', cursive, Arial;
+    color: #551A8B;
+    font-size: 45px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+nav ul{
+    text-align: left;
+    list-style-type: none;
+}
+
+nav ul li {
+    border-bottom: dotted #000 1px;
+}
+
+nav ul li img{
+    width: 29px;
+    height: 29px;
+    border: none;
+    margin-right: 5px;
+    padding-top: -3px;
+}
+
+nav ul a:link, a:active, a:visited{
+    font-family: 'Baloo Tamma', cursive, Arial;
+    text-decoration: none;
+    color: #551A8B;
+    font-size: 30px;
+}
+
+nav ul a:hover{
+    color: chocolate;
+}
+
+section, #tabelaStatus{
+    background-color: rgba(255,255,255,.7);
+    border: solid #fff 1px;
+    padding: 10px 10px 10px 10px;
+}
+
+section article{
+    text-align: justify;
+}
+
+section article h2{
+    font-family: 'Baloo Tamma', cursive, Arial;
+    color: #551A8B;
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+section article p{
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #551A8B;    
+}
+
+table {
+  border-collapse: collapse;
+  width: 50em;
+  border: 1px solid #666;
+}
+thead {
+  background: #ccc url(http://www.devfuria.com.br/html-css/tabelas/bar.gif) repeat-x left center;
+  border-top: 1px solid #a5a5a5;
+  border-bottom: 1px solid #a5a5a5;
+}
+tr:hover {
+  background-color:#3d80df;
+  color: #fff;
+}
+thead tr:hover {
+  background-color: transparent;
+  color: inherit;
+}
+tr:nth-child(even) {
+    background-color: #edf5ff;
+}
+th {
+  font-weight: normal;
+  text-align: left;
+}
+th, td {
+  padding: 0.1em 1em;
+}
+
+footer p{
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #551A8B;
+}
+
+#tabelaStatus{
+    display: block;
+    width: 800px;
+    height: auto;
+    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    
+    overflow: auto;
+}
