@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<script type="text/javascript" src="script/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="script/nodo.js"></script>
+	<script type="text/javascript" src="script/cola.js"></script>	
+	<script type="text/javascript" src="script/script.js"></script>	
+	<title>Round Robin</title>
+</head>
+<body>
+	<div id="contenedor">
+		<header><h2>Round Robin</h2></header>
+		<div id="reloj"></div>
+		<div id="seccion-critica">
+			<div id="proceso"></div>
+		</div>		
+		<div id="mensaje">
+		</div>
+		<div id="respuesta">
+		</div>
+		<div id="secciones">
+			<p>Listos</p>
+			<p>Bloqueados</p>
+			<p>Suspendidos</p>
+			<p>Terminados</p>
+		</div>
+		<div class="columna" id="listos"></div>
+		<div class="columna" id="bloqueados"></div>
+		<div class="columna" id="suspendidos"></div>
+		<div class="columna" id="terminados"></div>
+	</div>
+	<div id="contenedor2">
+		<header><h2>Diagrama de Gant</h2></header>
+		<canvas id="gant"  width="1100" height="500"></canvas>
+	</div>
+	<div id="anim"></div>
+	
+</body>
+</html>

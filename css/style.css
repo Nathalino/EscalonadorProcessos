@@ -18,6 +18,40 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	background: transparent;
 }
 
+.executando{
+    color: #B25900;
+}
+.espera{
+    color: #004C66;
+}
+.pronto{
+    color: #660066;
+}
+.molder{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #fff;
+    
+    background-color: #00175E;
+    
+    float: left;
+    clear: none;
+    width: 166px;
+    height: 90px;
+    
+    padding: 5px 5px 5px 5px;
+    margin-right: 10px;
+    
+    border-radius: 2px;
+}
+.bordar{
+    border-right: solid #242415 2px;
+}
+
+.campoQuantum{
+    width: 36px;
+}
+
 body{
     background: #fff url(../img/bg/bg.png);
     background-repeat: no-repeat;
@@ -96,6 +130,42 @@ section article p{
     color: #551A8B;    
 }
 
+section article form ul{
+    
+    margin-top: 20px;
+    list-style-type: none;
+}
+
+section article form ul li{
+    margin-bottom: 5px;
+}
+
+section article form label{
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #000; 
+}
+
+section article form input[type=number]{
+    width: 100px;
+    height: 30px;
+    border-radius: 2px;
+    border: solid #242415 1px;
+}
+
+section article form input[type=button]{
+    margin-top: 15px;
+    margin-right: 10px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+    border: solid #242415 1px;
+}
+
+section article form input[type=button]:hover{
+    color: #fff;
+    background-color: #551A8B;
+}
+
 footer p{
     font-family: Arial, sans-serif;
     font-size: 12px;
@@ -112,4 +182,31 @@ footer p{
     margin-bottom: 20px;
     
     overflow: auto;
+}
+#tabelaStatus p{
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: bold;
+    color: #000;
+    
+    margin-top: 10px;
+}
+#tabelaStatus ul{
+    margin-bottom: 15px;
+    list-style-type: none;
+    border: solid #242415 2px;
+}
+#tabelaStatus ul li{
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    text-align: center;
+    
+    display: inline;
+}
+#tabelaStatus #nucleo{
+    height: 120px;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }

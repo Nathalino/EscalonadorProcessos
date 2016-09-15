@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>Round Robin - Simulador de Escalonador de Processos</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="text/javascript" src=""></script>
+        <script type="text/javascript" src="js/expansaoDiv.js"></script>
     </head>
     
     <body>
@@ -25,21 +25,67 @@
                 <form action="">
                     <ul>
                         <li><label for="nProcessadores">Número de processadores:</label></li>
-                        <li><input type="number" name="nProcessadores" id="nProcessadores"></li>
+                        <li><input type="number" name="fnProcessadores" id="fnProcessadores"></li>
                         <li><label for="nProcessos">Número de processos iniciais:</label></li>
-                        <li><input type="number" name="nProcessos" id="nProcessos"></li>
+                        <li><input type="number" name="fnProcessos" id="fnProcessos"></li>
                         <li><label for="quantum">Quantum:</label></li>
-                        <li><input type="number" name="quantum" id="quantum"></li>
+                        <li><input type="number" name="fquantum" id="fquantum"></li>
                         <li>
-                            <input type="button" value="Iniciar" onclick="">
-                            <input type="button" value="Adicionar processo" onclick="">
+                            <input type="button" value="Iniciar" onclick="tamanho();">
+                            <input type="button" value="Adicionar processo" onclick="tamanho();">
                         </li>
                     </ul>
                 </form>
             </article>
         </section>
         
-        <div id="tabelaStatus"></div>
+        <div id="tabelaStatus">
+            <p>Quantum:</p>
+            <ul class="campoQuantum">
+                <li id="quantum">5</li>
+            </ul>
+            
+            <p>Processadores (Executando):</p>
+            <div id="nucleo">
+                <div id="Nprocessos">
+                    <div id="n1" class="molder">ID: P1<br>Tempo de vida: 20s</div>
+                    <div id="n2" class="molder"></div>
+                    <div id="n3" class="molder"></div>
+                    <div id="n4" class="molder"></div>
+                </div>
+            </div>
+            
+            <p>Filas de prioridades (Espera):</p>
+            <ul>
+                <li class="bordar espera">p4</li>
+                <li class="bordar espera">p5</li>
+                <li class="bordar espera">p6</li>
+            </ul>
+            <ul>
+                <li class="bordar espera">p7</li>
+                <li class="bordar espera">p8</li>
+                <li class="bordar espera">p9</li>
+                <li class="bordar espera">p10</li>
+            </ul>
+            <ul>
+                <li class="bordar espera">p11</li>
+                <li class="bordar espera">p12</li>
+                <li class="bordar espera">p13</li>
+                <li class="bordar espera">p14</li>
+                <li class="bordar espera">p15</li>
+            </ul>
+            <ul>
+                <li class="bordar espera">p16</li>
+                <li class="bordar espera">p18</li>
+            </ul>
+            
+            <p>Pronto(s):</p>
+            <ul>
+                <li class="bordar pronto">p1</li>
+                <li class="bordar pronto">p2</li>
+                <li class="bordar pronto">p3</li>
+            </ul>                   
+        </div>
         
         <footer>
             <p>Todos os direitos reservado aos membros da equipe: Nathalino Pachêco Britto e Breno Negreiros Ferreira</p>
