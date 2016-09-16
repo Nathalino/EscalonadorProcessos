@@ -8,7 +8,3 @@ function tamanho(){
 	var total = 200 * Div.length; // 200 é o tamanho da largura - div núcleo.
 	document.getElementById("Nprocessos").style.width = total+"px"; //Atribuindo na CSS o tamanho da Div NProcessos.
 }
-
-function a(){
-	alert("So tirando onda");
-}
