@@ -12,7 +12,7 @@ var filap0 = new Array();
 var filap1 = new Array();
 var filap2 = new Array();
 var filap3 = new Array();
-var filaProcessados = new Array();
+var filaProntos = new Array();
 
 var objetoProcessos = new Object();
 
@@ -73,7 +73,8 @@ function CriacaoProcessos(totalProcessos){
 		objetoProcessos.tempoVida = tempoDeVida;
 		objetoProcessos.tempoRestante = tempoDeVida;
 		objetoProcessos.filaPrioridade = nFilaPrioridade;
-
+		
+		
 		console.log(tempoDeVida);
 		console.log(nFilaPrioridade);
 
@@ -88,7 +89,9 @@ function inserirElementoFila(objeto){
 		
 		case 0:
 			filap0[filap0.length] = objeto;
+			
 			console.log(filap0.toString());
+			
 		break;
 		
 		case 1:
@@ -109,8 +112,16 @@ function inserirElementoFila(objeto){
 		default:
 			alert("Não foi possível criar o(s) processo(s) na(s) fila(s) de prioridade(s).");
 	}
+
 }
 
 
+//INSERINDO ELEMENTOS NA FILA PRONTO(S)
+/*function inserirProntos(objeto){
+	
+	filaProntos[filaProntos.length]=objeto;
+	console.log("Prontos");
+	console.log(filaProntos.toString());
+}*/
 
 }
