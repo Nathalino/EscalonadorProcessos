@@ -3,7 +3,7 @@
 
 //Variaveis Globais:
 var idProcessos = 0;
-var totalProcessadores=4;
+var totalProcessadores;
 var totalProcessosIniciais;
 var quantum;
 
@@ -40,6 +40,11 @@ function acao(){
 		//Criando Processos e inserindo na Fila de espera:
 		totalProcessosIniciais = document.getElementById("fnProcessos").value;
 		CriacaoProcessos(totalProcessosIniciais);
+		
+		//Inserindo elementos no processadores:
+		totalProcessadores = document.getElementById("fnProcessadores");
+		Processador(totalProcessadores);
+
 
 	}
 
@@ -80,8 +85,7 @@ function CriacaoProcessos(totalProcessos){
 
 		inserirElementoFila(objetoProcessos);
 	}
-	//criei pra testar o metodo Processador() com 3 processadores-----------------------------------------------------------------------------------BrenoNegreiros
-Processador(3);
+
 }
 //INSERINDO ELEMENTOS NA FILA DE ACORDO COM SUA PRIORIDADE:
 function inserirElementoFila(objeto){
@@ -127,7 +131,7 @@ function inserirElementoFila(objeto){
 
 
 // Tirando da fila de prioridades e colando no processador---------------------------------------------------------------------------------BrenoNegreiros
-function Processador(totalProcessadores){
+function Processando(totalProcessadores){
 	var numero=0;
 	for(var i = 0; i<totalProcessadores; i++){
 		if(numero<=3){
