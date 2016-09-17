@@ -3,7 +3,7 @@
 
 //Variaveis Globais:
 var idProcessos = 0;
-var totalProcessadores;
+var totalProcessadores=4;
 var totalProcessosIniciais;
 var quantum;
 
@@ -80,8 +80,9 @@ function CriacaoProcessos(totalProcessos){
 
 		inserirElementoFila(objetoProcessos);
 	}
-
-
+	//criei pra testar o metodo Processador() com 3 processadores-----------------------------------------------------------------------------------BrenoNegreiros
+Processador(3);
+}
 //INSERINDO ELEMENTOS NA FILA DE ACORDO COM SUA PRIORIDADE:
 function inserirElementoFila(objeto){
 
@@ -116,7 +117,7 @@ function inserirElementoFila(objeto){
 }
 
 
-//INSERINDO ELEMENTOS NA FILA PRONTO(S)
+//INSERINDO ELEMENTOS NA FILA PRONTO(S)----------------------------------------------------------------------------------------------------BrenoNegreiros
 /*function inserirProntos(objeto){
 	
 	filaProntos[filaProntos.length]=objeto;
@@ -124,4 +125,59 @@ function inserirElementoFila(objeto){
 	console.log(filaProntos.toString());
 }*/
 
+
+// Tirando da fila de prioridades e colando no processador---------------------------------------------------------------------------------BrenoNegreiros
+function Processador(totalProcessadores){
+	var numero=0;
+	for(var i = 0; i<totalProcessadores; i++){
+		if(numero<=3){
+			console.log("PROCESSOS NO MEU PROCESSADOR(executando)")
+			processador[processador.length]= removerElementoFila(numero);
+			console.log(processador.length);
+		}else{
+		numero=0;
+		}
+		
+	}
+	
 }
+
+//REMOVENDO PRIMEIRO ELEMENTO DA FILA DE PRIORIDADE E RETORNANDO O PRIMEIRO ELEMENTO DA FILA--------------------------------------------------BrenoNegreiros
+function removerElementoFila(numero){
+var temp;
+	switch(numero){
+		
+		case 0:
+			temp = filap0[0];
+			filap0[0] = null;
+			
+			return temp;
+		break;
+		
+		case 1:
+			temp = filap1[0];
+			filap1[0] = null;
+			return temp;
+		break;
+
+		case 2:
+			temp = filap2[0];
+			filap2[0] = null;
+			return temp;
+		break;
+
+		case 3:
+			temp = filap3[0];
+			filap3[0] = null;
+			return temp;
+		break;
+
+		default:
+			alert("Não foi possível remover processo(s) da fila de prioridade");
+	}
+
+}
+
+
+
+
