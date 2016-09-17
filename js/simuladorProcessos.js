@@ -74,7 +74,7 @@ function CriacaoProcessos(totalProcessos){
 		objetoProcessos.tempoRestante = tempoDeVida;
 		objetoProcessos.filaPrioridade = nFilaPrioridade;
 		
-		
+		console.log(idProcessos);
 		console.log(tempoDeVida);
 		console.log(nFilaPrioridade);
 
@@ -133,7 +133,10 @@ function Processador(totalProcessadores){
 		if(numero<=3){
 			console.log("PROCESSOS NO MEU PROCESSADOR(executando)")
 			processador[processador.length]= removerElementoFila(numero);
-			console.log(processador.length);
+			
+		
+		
+			numero++;
 		}else{
 		numero=0;
 		}
@@ -145,23 +148,30 @@ function Processador(totalProcessadores){
 //REMOVENDO PRIMEIRO ELEMENTO DA FILA DE PRIORIDADE E RETORNANDO O PRIMEIRO ELEMENTO DA FILA--------------------------------------------------BrenoNegreiros
 function removerElementoFila(numero){
 var temp;
+
+
 	switch(numero){
 		
 		case 0:
+		console.log("entrou case 0");
 			temp = filap0[0];
 			filap0[0] = null;
-			
+			console.log(temp);
 			return temp;
 		break;
 		
 		case 1:
+		console.log("entrou case 1");
 			temp = filap1[0];
 			filap1[0] = null;
+			console.log(temp);
 			return temp;
 		break;
 
 		case 2:
+		console.log("entrou case 2");
 			temp = filap2[0];
+			console.log(temp);
 			filap2[0] = null;
 			return temp;
 		break;
@@ -169,6 +179,7 @@ var temp;
 		case 3:
 			temp = filap3[0];
 			filap3[0] = null;
+			console.log(temp);
 			return temp;
 		break;
 
