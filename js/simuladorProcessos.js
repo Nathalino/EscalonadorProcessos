@@ -62,12 +62,12 @@ function validacaoCampos(nomeCampo, textoImpressao){
 //CRIACAO DOS PROCESSOS:
 function CriacaoProcessos(totalProcessos){
 
-	for(var x = 0; x<=totalProcessos; x++){
+	for(var x = 0; x<totalProcessos; x++){
 
 		idProcessos++; 
 		var tempoDeVida = Math.floor((Math.random()*4)+16); //tempo entre 4 e 20.
 		quantum;
-		var nFilaPrioridade = Math.floor((Math.random()*1)+3);//tempo entre 0 e 3.
+		var nFilaPrioridade = Math.floor((Math.random()*3)+0);//tempo entre 0 e 3.
 
 		objetoProcessos.id = idProcessos;
 		objetoProcessos.tempoVida = tempoDeVida;
