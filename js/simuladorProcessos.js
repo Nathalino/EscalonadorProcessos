@@ -284,14 +284,7 @@ function validacaoCampos(nomeCampo, textoImpressao){
 
 //ADICIONANDO TAG no HTML:
 function addTAGs(idSeletor, tag, idFilho, classFilho){
-
-	var idPai = idSeletor;
-	var tagfilho = tag;
-	var filhoid = idFilho;
-	var classes = classFilho;
-
-	console.log("Id do seletor: "+idSeletor+" Tag a criar: "+tag+" ID do Filho: "+idFilho+" Classes do filho: "+ classFilho );
-
+	//Acessando o elemento Pai:
 	var objPai = document.getElementById(idSeletor);
 
     //Criando o elemento DIV;
