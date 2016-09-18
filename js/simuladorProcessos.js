@@ -50,7 +50,9 @@ function acao(){
 		//Inserindo elementos no processadores:
 		totalProcessadores = document.getElementById("fnProcessadores").value;
 		Processando(totalProcessadores);
-						ProcessadorEmMovimento();// >>>>>>>>>>>>>>>>_ COLOQUEI PRA TESTAR
+		
+		/*
+		ProcessadorEmMovimento();// >>>>>>>>>>>>>>>>_ COLOQUEI PRA TESTAR
 		console.log("Fila de Prioridade 0");
 		for(var i=0 ; i<filap0.length; i++){
 			console.log(filap0[i]);	
@@ -70,15 +72,6 @@ function acao(){
 		console.log("Fila do Processador");
 		for(var i=0 ; i<processador.length; i++){
 			console.log(processador[i]);	
-		}
-		/*
-		var a = 3;
-		console.log("INICIO");
-		for(var i=0 ; i<=a; i++){
-			console.log(filap0[i]);
-			console.log(filap1[i]);
-			console.log(filap2[i]);
-			console.log(filap3[i]);	
 		}
 		*/
 	}
@@ -140,76 +133,40 @@ function inserirElementoFila(objeto){
 
 }
 
-
-//INSERINDO ELEMENTOS NA FILA PRONTO(S)----------------------------------------------------------------------------------------------------BrenoNegreiros
-/*
-function inserirProntos(objeto){
-	
-	filaProntos[filaProntos.length]=objeto;
-	console.log("Prontos");
-	console.log(filaProntos.toString());
-}
-*/
-
-
-
-
-// Tirando da fila de prioridades e colando no processador---------------------------------------------------------------------------------BrenoNegreiros
-
-
+//PROCESSADOR:
 function Processando(totalNucleos){
-
 	var n = 0;
-
-	console.log(totalNucleos);
-	console.log("Entrou na função Processador");
-
 	for(var x = 0; x < totalNucleos; x++){
 		if(n <= 3){
-			processador[processador.length] = removerElementoFila(n);		
-			
-			
+			processador[processador.length] = removerElementoFila(n);								
 			n++;
 		}else{
 			n = 0;
 		}		
 	}
-	
 }
 
 
 
 function ProcessadorEmMovimento(){ //------------------------------------------------------------------------------------------------------BrenoNegreiros
 	
-		
 		for(var x=0 ; x<processador.length; x++){
 			
 			quantum = 14 // >>>>>>>>>>>>>>>>_atribuindo valor ao quantum
 			
-			
-		
-			
+					
 			while(quantum!=0){  // >>>>>>>>>>>>>>>>_enquanto quantum não for 0 , ele continuará em loop
 				
+				processador[x].tempoRestante = Math.round((processador[x].tempoRestante-0.1)*10)/10; // >>>>>>>>>>>>>>>>_decrementando tempo restante do processo X
+				quantum = Math.round((quantum-0.1)*10)/10;		// >>>>>>>>>>>>>>>>_decrementando o quantum
+				console.log("Processador de ID   "+processador[x].id+" ,TEMPO     "+processador[x].tempoRestante)
 				
-				
-				
-				
-			processador[x].tempoRestante = Math.round((processador[x].tempoRestante-0.1)*10)/10; // >>>>>>>>>>>>>>>>_decrementando tempo restante do processo X
-			quantum = Math.round((quantum-0.1)*10)/10;		// >>>>>>>>>>>>>>>>_decrementando o quantum
-			
-				
-					
-			  
 		    }
 			
 
 
 		}
 		
-		
-	
-	
 	
 }
 
@@ -222,7 +179,8 @@ function ProcessadorEmMovimento(){ //-------------------------------------------
   }
 */
 
-//REMOVENDO PRIMEIRO ELEMENTO DA FILA DE PRIORIDADE E RETORNANDO O PRIMEIRO ELEMENTO DA FILA----------------------------------------------BrenoNegreiros
+
+//REMOVENDO PRIMEIRO ELEMENTO DA FILA DE PRIORIDADE E RETORNANDO O PRIMEIRO ELEMENTO DA FILA:
 function removerElementoFila(numero){
 
 var temp = null;
@@ -232,10 +190,10 @@ var validacao = false;
 		switch(numero){
 				
 				case 0:
-					console.log("entrou case 0");
+					//console.log("entrou case 0");
 					if(filap0[0] == null){
 						numero = 1;
-						console.log("Foi para o caso 1");
+						//console.log("Foi para o caso 1");
 					}else{
 						temp = filap0[0];
 						filap0.shift();
@@ -244,10 +202,10 @@ var validacao = false;
 				break;
 				
 				case 1:
-					console.log("entrou case 1");
+					//console.log("entrou case 1");
 					if(filap1[0] == null){
 						numero = 2;
-						console.log("Foi para o caso 2");
+						//console.log("Foi para o caso 2");
 					}else{
 						temp = filap1[0];
 						filap1.shift();
@@ -256,10 +214,10 @@ var validacao = false;
 				break;
 
 				case 2:
-					console.log("entrou case 2");
+					//console.log("entrou case 2");
 					if(filap2[0] == null){
 						numero = 3;
-						console.log("Foi para o caso 3");
+						//console.log("Foi para o caso 3");
 					}else{
 						temp = filap2[0];
 						filap2.shift();
@@ -268,10 +226,10 @@ var validacao = false;
 				break;
 
 				case 3:
-					console.log("entrou case 3");
+					//console.log("entrou case 3");
 					if(filap3[0] == null){
 						numero = 4;
-						console.log("Foi para o caso 4");
+						//console.log("Foi para o caso 4");
 					}else{
 						temp = filap3[0];
 						filap3.shift();
@@ -280,7 +238,7 @@ var validacao = false;
 				break;
 
 				case 4:
-					console.log("entrou case 4");
+					//console.log("entrou case 4");
 					if(filap0[0] == null &&	filap1[0] == null && filap2[0] == null && filap3[0] == null){
 						validacao = true;
 					}else{
@@ -293,9 +251,20 @@ var validacao = false;
 				break;
 			}
 	}
-	console.log("Saiu da função removerElementoFila");
+	//console.log("Saiu da função removerElementoFila");
 	return temp;
 }
+
+
+//INSERINDO ELEMENTOS NA FILA PRONTO(S)----------------------------------------------------------------------------------------------------BrenoNegreiros
+/*
+function inserirProntos(objeto){
+	
+	filaProntos[filaProntos.length]=objeto;
+	console.log("Prontos");
+	console.log(filaProntos.toString());
+}
+*/
 
 
 //VALIDACAO DOS CAMPOS DO FORMULÁRIO:
