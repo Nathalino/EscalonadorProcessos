@@ -41,11 +41,13 @@
         </section>
         
         <div id="tabelaStatus">
+            <!-- QUANTUM -->
             <p>Quantum:</p>
             <ul class="campoQuantum">
                 <li id="Cquantum"></li>
             </ul>
             
+            <!-- PROCESSADOR -->
             <p>Processadores (Executando):</p>
             <div id="nucleo">
                 <div id="Nprocessos">
@@ -56,26 +58,32 @@
                 </div>
             </div>
             
-            <p>Filas de prioridades (Espera):</p>
-            <ul id="filap0">
-                <li class="bordar espera"></li>
-            </ul>
-            <ul id="filap1">
-                <li class="bordar espera"></li>
-            </ul>
-            <ul id="filap2">
-                <li class="bordar espera"></li>
-            </ul>
-            <ul id="filap3">
-                <li class="bordar espera"></li>
-            </ul>
-            
-            <p>Pronto(s):</p>
-            <ul>
-                <li class="bordar pronto"></li>
-            </ul>                   
+            <div id="filas">
+                <div id="Nfilas">
+                    <!-- FILAS DE PRIORIDADES -->
+                    <p>Filas de prioridades (Espera):</p>
+                    <ul id="filap0">
+                        <li class="bordar espera negrito">P0</li>
+                    </ul>
+                    <ul id="filap1">
+                        <li class="bordar espera negrito">P1</li>
+                    </ul>
+                    <ul id="filap2">
+                        <li class="bordar espera negrito">P2</li>
+                    </ul>
+                    <ul id="filap3">
+                        <li class="bordar espera negrito">P3</li>
+                    </ul>    
+
+                    <!-- FILAS DE EXECUTADOS -->
+                    <p>Pronto(s):</p>
+                    <ul>
+                        <li class="bordar pronto"></li>
+                    </ul>
+                </div>    
+            </div>    
         </div>
-        
+        <!-- END TABELA DE STATUS -->
         <footer>
             <p>Todos os direitos reservado aos membros da equipe: Nathalino Pachêco Britto e Breno Negreiros Ferreira</p>
         </footer>

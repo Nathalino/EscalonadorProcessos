@@ -17,7 +17,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	vertical-align: baseline;
 	background: transparent;
 }
-
+.negrito{
+    font-weight: bold;
+}
 .executando{
     color: #B25900;
 }
@@ -215,4 +217,8 @@ footer p{
     height: 120px;
     overflow-x: scroll;
     overflow-y: hidden;
+}
+#tabelaStatus #filas{
+    overflow-x: scroll;
+    overflow-y: hidden
 }

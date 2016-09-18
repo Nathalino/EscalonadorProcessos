@@ -87,7 +87,7 @@ function CriacaoProcessos(totalProcessos){
 
 		var objetoProcessos = new consProcesso(); 
 		var tempoDeVida = Math.floor((Math.random()*4)+16); //tempo entre 4 e 20.
-		var nFilaPrioridade = Math.floor((Math.random()*3)+0);//tempo entre 3 e 0.
+		var nFilaPrioridade = Math.floor((Math.random()*4)+0);//tempo entre 3 e 0.
 
 		objetoProcessos.id = idProcessos;
 		objetoProcessos.tempoVida = tempoDeVida;
