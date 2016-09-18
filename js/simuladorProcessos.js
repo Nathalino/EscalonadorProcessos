@@ -94,8 +94,12 @@ function CriacaoProcessos(totalProcessos){
 		objetoProcessos.tempoRestante = tempoDeVida;
 		objetoProcessos.filaPrioridade = nFilaPrioridade;
 		
+		//Inserindo elemento na Fila:
 		inserirElementoFila(objetoProcessos);
+		//Inserindo elemento no HTML:
+		addTAGs("filap"+nFilaPrioridade, "li", idProcessos, "bordar espera");
 		idProcessos++;
+
 	}
 
 }
@@ -276,4 +280,32 @@ function validacaoCampos(nomeCampo, textoImpressao){
 	}else{
 		return true;
 	}
+}
+
+//ADICIONANDO TAG no HTML:
+function addTAGs(idSeletor, tag, idFilho, classFilho){
+
+	var idPai = idSeletor;
+	var tagfilho = tag;
+	var filhoid = idFilho;
+	var classes = classFilho;
+
+	console.log("Id do seletor: "+idSeletor+" Tag a criar: "+tag+" ID do Filho: "+idFilho+" Classes do filho: "+ classFilho );
+
+	var objPai = document.getElementById(idSeletor);
+
+    //Criando o elemento DIV;
+    var objFilho = document.createElement(tag);
+
+    //Definindo atributo ao objFilho: (ID)
+    objFilho.setAttribute("id", idFilho);
+        
+    //Definindo Atributo ao objFilho (Class):
+    objFilho.setAttribute("class", classFilho);        
+
+    //Inserindo o elemento no pai:
+    objPai.appendChild(objFilho);
+
+    //Escrevendo algo no filho recém-criado:
+	document.getElementById(idFilho).innerHTML = idFilho;
 }

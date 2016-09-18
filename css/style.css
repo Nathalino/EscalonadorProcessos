@@ -193,9 +193,11 @@ footer p{
     margin-top: 10px;
 }
 #tabelaStatus ul{
+    display: block;
     margin-bottom: 15px;
-    list-style-type: none;
+    overflow: auto;
     border: solid #242415 2px;
+    list-style-type: none;
 }
 #tabelaStatus ul li{
     font-family: Arial, sans-serif;
@@ -203,7 +205,11 @@ footer p{
     font-style: normal;
     text-align: center;
     
+    padding-left: 10px;
+    padding-right: 10px;
+    
     display: inline;
+    float: left;
 }
 #tabelaStatus #nucleo{
     height: 120px;
