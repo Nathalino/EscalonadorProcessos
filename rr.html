@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title>Round Robin - Simulador de Escalonador de Processos</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="text/javascript" src="js/expansaoDiv.js"></script>
         <script type="text/javascript" src="js/simuladorProcessos.js" charset="UTF-8"></script>
     </head>
     
@@ -32,8 +31,8 @@
                         <li><label for="quantum">Quantum:</label></li>
                         <li><input type="number" name="fquantum" id="fquantum"></li>
                         <li>
-                            <input type="button" value="Iniciar" onclick="tamanho(); acao()">
-                            <input type="button" value="Adicionar processo" onclick="tamanho();">
+                            <input type="button" value="Iniciar" onclick="acao()">
+                            <input type="button" value="Adicionar processo" onclick="">
                         </li>
                     </ul>
                 </form>
@@ -50,12 +49,7 @@
             <!-- PROCESSADOR -->
             <p>Processadores (Executando):</p>
             <div id="nucleo">
-                <div id="Nprocessos">
-                    <div id="n1" class="molder">ID: P1<br>Tempo de vida: 20s</div>
-                    <div id="n2" class="molder"></div>
-                    <div id="n3" class="molder"></div>
-                    <div id="n4" class="molder"></div>
-                </div>
+                <div id="Nprocessos"></div>
             </div>
             
             <div id="filas">

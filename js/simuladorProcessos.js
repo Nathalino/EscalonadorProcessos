@@ -13,7 +13,6 @@ var filap2 = new Array();
 var filap3 = new Array();
 var filaProntos = new Array();
 
-
 //CONSTRUTOR
 function consProcesso(){
 	var id;
@@ -49,10 +48,11 @@ function acao(){
 		
 		//Inserindo elementos no processadores:
 		totalProcessadores = document.getElementById("fnProcessadores").value;
-		Processando(totalProcessadores);
+		//Dando um intervalo de 3 segundos para iniciar o processador:
+		setTimeout(Processando, 5000);
 		
-		/*
-		ProcessadorEmMovimento();// >>>>>>>>>>>>>>>>_ COLOQUEI PRA TESTAR
+		
+		//ProcessadorEmMovimento();// >>>>>>>>>>>>>>>>_ COLOQUEI PRA TESTAR
 		console.log("Fila de Prioridade 0");
 		for(var i=0 ; i<filap0.length; i++){
 			console.log(filap0[i]);	
@@ -67,13 +67,17 @@ function acao(){
 		for(var i=0 ; i<filap2.length; i++){
 			console.log(filap2[i]);	
 		}
-		
+		console.log("/////////////////////");		
+		console.log("Fila de Prioridade 3");
+		for(var i=0 ; i<filap3.length; i++){
+			console.log(filap3[i]);	
+		}		
 		console.log("/////////////////////");
 		console.log("Fila do Processador");
 		for(var i=0 ; i<processador.length; i++){
 			console.log(processador[i]);	
 		}
-		*/
+		
 	}
 
 
@@ -89,6 +93,7 @@ function CriacaoProcessos(totalProcessos){
 		var tempoDeVida = Math.floor((Math.random()*4)+16); //tempo entre 4 e 20.
 		var nFilaPrioridade = Math.floor((Math.random()*4)+0);//tempo entre 3 e 0.
 
+		//Adicionando os elementos no Objeto:
 		objetoProcessos.id = idProcessos;
 		objetoProcessos.tempoVida = tempoDeVida;
 		objetoProcessos.tempoRestante = tempoDeVida;
@@ -97,7 +102,7 @@ function CriacaoProcessos(totalProcessos){
 		//Inserindo elemento na Fila:
 		inserirElementoFila(objetoProcessos);
 		//Inserindo elemento no HTML:
-		addTAGs("filap"+nFilaPrioridade, "li", idProcessos, "bordar espera");
+		addTAGs("filap"+nFilaPrioridade, "li", idProcessos, "bordar espera", 1, null);
 		idProcessos++;
 
 	}
@@ -138,12 +143,17 @@ function inserirElementoFila(objeto){
 }
 
 //PROCESSADOR:
-function Processando(totalNucleos){
+function Processando(){
 	var n = 0;
-	for(var x = 0; x < totalNucleos; x++){
+	for(var x = 0; x < totalProcessadores; x++){
 		if(n <= 3){
-			processador[processador.length] = removerElementoFila(n);								
+			var objetoFila = removerElementoFila(n);
+			processador[processador.length] = objetoFila;
+			
+			//Inserindo elemento no HTML:
+			addTAGs("Nprocessos", "div", objetoFila.id, "molder", 2, objetoFila);								
 			n++;
+
 		}else{
 			n = 0;
 		}		
@@ -151,37 +161,17 @@ function Processando(totalNucleos){
 }
 
 
-
 function ProcessadorEmMovimento(){ //------------------------------------------------------------------------------------------------------BrenoNegreiros
-	
 		for(var x=0 ; x<processador.length; x++){
-			
-			quantum = 14 // >>>>>>>>>>>>>>>>_atribuindo valor ao quantum
-			
-					
+			quantum = 14 // >>>>>>>>>>>>>>>>_atribuindo valor ao quantum	
 			while(quantum!=0){  // >>>>>>>>>>>>>>>>_enquanto quantum não for 0 , ele continuará em loop
 				
 				processador[x].tempoRestante = Math.round((processador[x].tempoRestante-0.1)*10)/10; // >>>>>>>>>>>>>>>>_decrementando tempo restante do processo X
 				quantum = Math.round((quantum-0.1)*10)/10;		// >>>>>>>>>>>>>>>>_decrementando o quantum
 				console.log("Processador de ID   "+processador[x].id+" ,TEMPO     "+processador[x].tempoRestante)
-				
 		    }
-			
-
-
 		}
-		
-	
 }
-
-/*function sleep(milliseconds) {-----------------------------------------------------------------------------------------------------------BrenoNegreiros
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-*/
 
 
 //REMOVENDO PRIMEIRO ELEMENTO DA FILA DE PRIORIDADE E RETORNANDO O PRIMEIRO ELEMENTO DA FILA:
@@ -200,6 +190,7 @@ var validacao = false;
 						//console.log("Foi para o caso 1");
 					}else{
 						temp = filap0[0];
+						removerTAGs("filap"+numero, temp.id);
 						filap0.shift();
 						validacao = true;
 					}
@@ -212,6 +203,7 @@ var validacao = false;
 						//console.log("Foi para o caso 2");
 					}else{
 						temp = filap1[0];
+						removerTAGs("filap"+numero, temp.id);
 						filap1.shift();
 						validacao = true;
 					}				
@@ -224,6 +216,7 @@ var validacao = false;
 						//console.log("Foi para o caso 3");
 					}else{
 						temp = filap2[0];
+						removerTAGs("filap"+numero, temp.id);
 						filap2.shift();
 						validacao = true;
 					}					
@@ -236,6 +229,7 @@ var validacao = false;
 						//console.log("Foi para o caso 4");
 					}else{
 						temp = filap3[0];
+						removerTAGs("filap"+numero, temp.id);
 						filap3.shift();
 						validacao = true;
 					}			
@@ -271,19 +265,8 @@ function inserirProntos(objeto){
 */
 
 
-//VALIDACAO DOS CAMPOS DO FORMULÁRIO:
-function validacaoCampos(nomeCampo, textoImpressao){
-	var x = document.getElementById(nomeCampo).value;
-	if( x == 0 || x == "" || x == null){
-		alert("O campo do(a) "+ textoImpressao +" não poderá ficar em branco ou ser zerado.");
-		return false;
-	}else{
-		return true;
-	}
-}
-
 //ADICIONANDO TAG no HTML:
-function addTAGs(idSeletor, tag, idFilho, classFilho){
+function addTAGs(idSeletor, tag, idFilho, classFilho, codigoExibicao, objeto){
 	//Acessando o elemento Pai:
 	var objPai = document.getElementById(idSeletor);
 
@@ -299,6 +282,37 @@ function addTAGs(idSeletor, tag, idFilho, classFilho){
     //Inserindo o elemento no pai:
     objPai.appendChild(objFilho);
 
-    //Escrevendo algo no filho recém-criado:
-	document.getElementById(idFilho).innerHTML = idFilho;
+    if(codigoExibicao == 1){
+	    //Escrevendo algo no filho recém-criado:
+		document.getElementById(idFilho).innerHTML = idFilho;
+	}else{
+	    //Escrevendo algo no filho recém-criado:
+		document.getElementById(idFilho).innerHTML = "ID: "+idFilho+
+													 "<br>Tempo de vida: "+objeto.tempoVida+
+													 "<br>Tempo Restante: "+objeto.tempoRestante+
+													 "<br>Quantum: "+quantum;		
+	}
+}
+
+//REMOVENDO TAG no HTML:
+function removerTAGs(idSeletor, idfilho) {
+
+	console.log("REMOVENDO: Filap"+idSeletor+" id do filho"+ idfilho);
+    
+    var objPai = document.getElementById(idSeletor);
+    var objFilho = document.getElementById(idfilho);
+
+    //Removendo o DIV com id específico do nó-pai:
+    var removido = objPai.removeChild(objFilho);
+}
+
+//VALIDACAO DOS CAMPOS DO FORMULÁRIO:
+function validacaoCampos(nomeCampo, textoImpressao){
+	var x = document.getElementById(nomeCampo).value;
+	if( x == 0 || x == "" || x == null){
+		alert("O campo do(a) "+ textoImpressao +" não poderá ficar em branco ou ser zerado.");
+		return false;
+	}else{
+		return true;
+	}
 }

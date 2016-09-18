@@ -31,7 +31,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 .molder{
     font-family: Arial, sans-serif;
-    text-align: center;
+    text-align: left;
     color: #fff;
     
     background-color: #00175E;
@@ -217,6 +217,10 @@ footer p{
     height: 120px;
     overflow-x: scroll;
     overflow-y: hidden;
+}
+#tabelaStatus #nucleo #Nprocessos, #Nfilas{
+    display: block;
+    width: 15000px;
 }
 #tabelaStatus #filas{
     overflow-x: scroll;
