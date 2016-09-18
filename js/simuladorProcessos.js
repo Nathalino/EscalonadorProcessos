@@ -51,16 +51,33 @@ function acao(){
 		totalProcessadores = document.getElementById("fnProcessadores").value;
 		Processando(totalProcessadores);
 
-		/*
-		var a = 3;
-		console.log("INICIO");
-		for(var i=0 ; i<=a; i++){
-			console.log(filap0[i]);
-			console.log(filap1[i]);
-			console.log(filap2[i]);
+		
+		console.log("Fila de Prioridade 0");
+		for(var i=0 ; i<filap0.length; i++){
+			console.log(filap0[i]);	
+		}
+		console.log("/////////////////////");
+		console.log("Fila de Prioridade 1");
+		for(var i=0 ; i<filap1.length; i++){
+			console.log(filap1[i]);	
+		}
+		console.log("/////////////////////");		
+		console.log("Fila de Prioridade 2");
+		for(var i=0 ; i<filap2.length; i++){
+			console.log(filap2[i]);	
+		}
+		console.log("/////////////////////");		
+		console.log("Fila de Prioridade 3");
+		for(var i=0 ; i<filap3.length; i++){
 			console.log(filap3[i]);	
 		}
-		*/
+		console.log("/////////////////////");
+		console.log("Fila do Processador");
+		for(var i=0 ; i<processador.length; i++){
+			console.log(processador[i]);	
+		}				
+
+
 	}
 
 
@@ -160,10 +177,10 @@ var validacao = false;
 		switch(numero){
 				
 				case 0:
-					console.log("entrou case 0");
+					//console.log("entrou case 0");
 					if(filap0[0] == null){
 						numero = 1;
-						console.log("Foi para o caso 1");
+						//console.log("Foi para o caso 1");
 					}else{
 						temp = filap0[0];
 						filap0.shift();
@@ -172,10 +189,10 @@ var validacao = false;
 				break;
 				
 				case 1:
-					console.log("entrou case 1");
+					//console.log("entrou case 1");
 					if(filap1[0] == null){
 						numero = 2;
-						console.log("Foi para o caso 2");
+						//console.log("Foi para o caso 2");
 					}else{
 						temp = filap1[0];
 						filap1.shift();
@@ -184,10 +201,10 @@ var validacao = false;
 				break;
 
 				case 2:
-					console.log("entrou case 2");
+					//console.log("entrou case 2");
 					if(filap2[0] == null){
 						numero = 3;
-						console.log("Foi para o caso 3");
+						//console.log("Foi para o caso 3");
 					}else{
 						temp = filap2[0];
 						filap2.shift();
@@ -196,10 +213,10 @@ var validacao = false;
 				break;
 
 				case 3:
-					console.log("entrou case 3");
+					//console.log("entrou case 3");
 					if(filap3[0] == null){
 						numero = 4;
-						console.log("Foi para o caso 4");
+						//console.log("Foi para o caso 4");
 					}else{
 						temp = filap3[0];
 						filap3.shift();
@@ -208,7 +225,7 @@ var validacao = false;
 				break;
 
 				case 4:
-					console.log("entrou case 4");
+					//console.log("entrou case 4");
 					if(filap0[0] == null &&	
 						filap1[0] == null && 
 						 filap2[0] == null && 
@@ -224,7 +241,7 @@ var validacao = false;
 				break;
 			}
 	}
-	console.log("Saiu da função removerElementoFila");
+	//console.log("Saiu da função removerElementoFila");
 	return temp;
 }
 
