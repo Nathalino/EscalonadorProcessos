@@ -181,12 +181,17 @@ function inserirElementoNucleo(){
 }
 
 function inserirElementoPronto(objeto){
-	//Adicionando o elemento no Vetor de Filas Prontas:
-	console.log(filaProntos.length);
-	console.log("Objeto que será adicionado na fila pronta: "+ objeto);
-	filaProntos[filaProntos.length] = objeto;
-	//Inserindo elemento no HTML:
-	addTAGs("filapronta", "li", objeto.id, "bordar pronto", 1, null);
+
+	var objetoProcessos = new consProcesso();
+	objetoProcessos = objeto;
+
+	if(objetoProcessos != null){
+		console.log("Objeto que será adicionado na fila pronta: "+ objeto);
+		filaProntos[filaProntos.length] = objetoProcessos;
+		//Inserindo elemento no HTML:
+		addTAGs("filapronta", "li", objetoProcessos.id, "bordar pronto", 1, null);
+	}
+
 }
 
 
@@ -275,35 +280,42 @@ function removerElementoProcessador(){
 
 	//Pegando o tamanho do vetor do processador:
 	var ultimaPosicao = processador.length;
-	//Pegando o(s) ultimo dado(s) do vetor processador: 
-	objetoProcessos = processador[ultimaPosicao];
- 	var FilaPrioridade = processador[ultimaPosicao-1].filaPrioridade;
 
-	//Remover o primeiro elemento do processador:
-	var elementoRemovido = processador.shift();
-	//Retornar o elemento para a fila de espera:
-	inserirElementoFila(elementoRemovido);
+	if(ultimaPosicao != 0){
 
-	removerTAGs("Nprocessos", elementoRemovido.id);
+		//Pegando o(s) ultimo dado(s) do vetor processador: 
+		objetoProcessos = processador[ultimaPosicao];
+	 	var FilaPrioridade = processador[ultimaPosicao-1].filaPrioridade;
 
-	var newObjeto;
+		//Remover o primeiro elemento do processador:
+		var elementoRemovido = processador.shift();
+		//Retornar o elemento para a fila de espera:
+		inserirElementoFila(elementoRemovido);
 
-	//Verifica qual é último processo inserido no processador para verificar a sua fila de prioridade:
-	if(FilaPrioridade == 0){
-		newObjeto = removerElementoFila(1);
-	}else{
+		removerTAGs("Nprocessos", elementoRemovido.id);
 
-		if(FilaPrioridade == 1){
-			newObjeto = removerElementoFila(2);
+		var newObjeto;
+
+		//Verifica qual é último processo inserido no processador para verificar a sua fila de prioridade:
+		if(FilaPrioridade == 0){
+			newObjeto = removerElementoFila(1);
 		}else{
-			if(FilaPrioridade == 2){
-				newObjeto = removerElementoFila(3);
+
+			if(FilaPrioridade == 1){
+				newObjeto = removerElementoFila(2);
 			}else{
-				newObjeto = removerElementoFila(0);
+				if(FilaPrioridade == 2){
+					newObjeto = removerElementoFila(3);
+				}else{
+					newObjeto = removerElementoFila(0);
+				}
 			}
 		}
+		return newObjeto;
+	}else{
+		return null;
 	}
-	return newObjeto;
+
 }
 
 function Processador(){
@@ -323,13 +335,14 @@ function Processador(){
 
 			var tempVida = processador[0].tempoRestante;
 			
-			if(tempVida >= 0){
+			if(tempVida > 0){
 				tempVida--;
 				processador[0].tempoRestante = tempVida;
 				document.getElementById("tR"+processador[0].id).innerHTML = tempVida;
+
 			}else{
 				newObjeto = processador.shift;
-				console.log(newObjeto);
+				console.log("Objeto removido por causa do tempo de vida igual a 0 - Código: "+newObjeto);
 				inserirElementoPronto(newObjeto);
 				removerTAGs("Nprocessos", processador[0].id);
 			}
@@ -340,11 +353,13 @@ function Processador(){
 			document.getElementById("Cquantum").innerHTML = quantum;
 			//Remover o primeiro elemento da Fila do Processador e tras o proximo elemento a ser inserido no processador.
 			newObjeto = removerElementoProcessador();
-			//Adiciona o proximo elemento da fila de espera no final do processador.
-			processador.push(newObjeto);
-			//Inserindo elemento no HTML:
-			console.log(newObjeto.id);
-			addTAGs("Nprocessos", "div", newObjeto.id, "molder", 2, newObjeto);
+			if(newObjeto != null){
+				//Adiciona o proximo elemento da fila de espera no final do processador.
+				processador.push(newObjeto);
+				//Inserindo elemento no HTML:
+				console.log("ID do novo objeto inserido no processador: "+ newObjeto.id);
+				addTAGs("Nprocessos", "div", newObjeto.id, "molder", 2, newObjeto);
+			}
 		}
 
 	}else{
@@ -386,7 +401,7 @@ function addTAGs(idSeletor, tag, idFilho, classFilho, codigoExibicao, objeto){
 //REMOVENDO TAG no HTML:
 function removerTAGs(idSeletor, idfilho) {
 
-	console.log("REMOVENDO: Fila"+idSeletor+" id do filho"+ idfilho);
+	//console.log("REMOVENDO: Fila"+idSeletor+" id do filho"+ idfilho);
     
     var objPai = document.getElementById(idSeletor);
     var objFilho = document.getElementById(idfilho);
