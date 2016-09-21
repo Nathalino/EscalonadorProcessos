@@ -54,6 +54,7 @@ function acao(){
 		//Iniciando os processamentos:
 		executando = setInterval("Processador()",1000);
 		
+		
 		/*
 		//ProcessadorEmMovimento();// >>>>>>>>>>>>>>>>_ COLOQUEI PRA TESTAR
 		console.log("Fila de Prioridade 0");
@@ -80,7 +81,8 @@ function acao(){
 		for(var i=0 ; i<processador.length; i++){
 			console.log(processador[i]);	
 		}
-		*/
+		*/	
+	
 		
 	}
 
@@ -105,8 +107,6 @@ function CriacaoProcessos(totalProcessos){
 		
 		//Inserindo elemento na Fila:
 		inserirElementoFila(objetoProcessos);
-		//Inserindo elemento no HTML:
-		addTAGs("filap"+nFilaPrioridade, "li", idProcessos, "bordar espera", 1, null);
 		idProcessos++;
 
 	}
@@ -124,6 +124,8 @@ function inserirElementoFila(objeto){
 				inserirElementoPronto(objeto);
 			}else{
 				filap0[filap0.length] = objeto;
+				//Inserindo elemento no HTML:
+				addTAGs("filap"+objeto.filaPrioridade, "li", objeto.id, "bordar espera", 1, null);				
 			}
 			//console.log(filap0[filap0.length-1]);	
 		break;
@@ -133,6 +135,8 @@ function inserirElementoFila(objeto){
 				inserirElementoPronto(objeto);
 			}else{
 				filap1[filap1.length] = objeto;
+				//Inserindo elemento no HTML:
+				addTAGs("filap"+objeto.filaPrioridade, "li", objeto.id, "bordar espera", 1, null);					
 			}		
 			//console.log(filap1[filap1.length-1]);
 		break;
@@ -142,6 +146,8 @@ function inserirElementoFila(objeto){
 				inserirElementoPronto(objeto);
 			}else{
 				filap2[filap2.length] = objeto;
+				//Inserindo elemento no HTML:
+				addTAGs("filap"+objeto.filaPrioridade, "li", objeto.id, "bordar espera", 1, null);					
 			}		
 			//console.log(filap2[filap2.length-1]);
 		break;
@@ -151,6 +157,8 @@ function inserirElementoFila(objeto){
 				inserirElementoPronto(objeto);
 			}else{
 				filap3[filap3.length] = objeto;
+				//Inserindo elemento no HTML:
+				addTAGs("filap"+objeto.filaPrioridade, "li", objeto.id, "bordar espera", 1, null);					
 			}
 			//console.log(filap3[filap3.length-1]);
 		break;
@@ -186,7 +194,7 @@ function inserirElementoPronto(objeto){
 	objetoProcessos = objeto;
 
 	if(objetoProcessos != null){
-		console.log("Objeto que será adicionado na fila pronta: "+ objeto);
+		console.log("(ID)Objeto que será adicionado na fila pronta: "+ objeto.id);
 		filaProntos[filaProntos.length] = objetoProcessos;
 		//Inserindo elemento no HTML:
 		addTAGs("filapronta", "li", objetoProcessos.id, "bordar pronto", 1, null);
@@ -341,12 +349,24 @@ function Processador(){
 				document.getElementById("tR"+processador[0].id).innerHTML = tempVida;
 
 			}else{
-				newObjeto = processador.shift;
+				removerTAGs("Nprocessos", processador[0].id);
+
+				//Remover o primeiro elemento da Fila do Processador e tras o proximo elemento a ser inserido no processador.
+				newObjeto = removerElementoProcessador();
+				if(newObjeto != null){
+					//Adiciona o proximo elemento da fila de espera no final do processador.
+					processador.push(newObjeto);
+					//Inserindo elemento no HTML:
+					console.log("ID do novo objeto inserido no processador: "+ newObjeto.id);
+					addTAGs("Nprocessos", "div", newObjeto.id, "molder", 2, newObjeto);
+				}
+
 				console.log("Objeto removido por causa do tempo de vida igual a 0 - Código: "+newObjeto);
 				inserirElementoPronto(newObjeto);
-				removerTAGs("Nprocessos", processador[0].id);
 			}
+
 			quantum--;
+
 		}else{
 			//O quantum volta a ter o tamanho de origem digitada pelo usuário:
 			quantum = document.getElementById("fquantum").value;
@@ -365,6 +385,37 @@ function Processador(){
 	}else{
 		//Parando de executar o Processador:
 		clearInterval(executando);
+
+		//ProcessadorEmMovimento();// >>>>>>>>>>>>>>>>_ COLOQUEI PRA TESTAR
+		console.log("Fila de Prioridade 0");
+		for(var i=0 ; i<filap0.length; i++){
+			console.log(filap0[i]);	
+		}
+		console.log("/////////////////////");
+		console.log("Fila de Prioridade 1");
+		for(var i=0 ; i<filap1.length; i++){
+			console.log(filap1[i]);	
+		}
+		console.log("/////////////////////");		
+		console.log("Fila de Prioridade 2");
+		for(var i=0 ; i<filap2.length; i++){
+			console.log(filap2[i]);	
+		}
+		console.log("/////////////////////");		
+		console.log("Fila de Prioridade 3");
+		for(var i=0 ; i<filap3.length; i++){
+			console.log(filap3[i]);	
+		}		
+		console.log("/////////////////////");
+		console.log("Fila do Processador");
+		for(var i=0 ; i<processador.length; i++){
+			console.log(processador[i]);	
+		}
+		console.log("/////////////////////");
+		console.log("Fila do Prontas");
+		for(var i=0 ; i<filaProntos.length; i++){
+			console.log(filaProntos[i]);	
+		}		
 	} 
 	
 }
