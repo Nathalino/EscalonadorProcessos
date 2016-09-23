@@ -197,7 +197,8 @@ function inserirElementoPronto(objeto){
 		console.log("(ID)Objeto que será adicionado na fila pronta: "+ objeto.id);
 		filaProntos[filaProntos.length] = objetoProcessos;
 		//Inserindo elemento no HTML:
-		addTAGs("filapronta", "li", objetoProcessos.id, "bordar pronto", 1, null);
+		addTAGs("filapronta", "li", objetoProcessos.id, "bordar pronto", 1, null);	
+		
 	}
 
 }
@@ -362,6 +363,7 @@ function Processador(){
 				}
 
 				console.log("Objeto removido por causa do tempo de vida igual a 0 - Código: "+newObjeto);
+				
 				inserirElementoPronto(newObjeto);
 			}
 
@@ -435,6 +437,7 @@ function addTAGs(idSeletor, tag, idFilho, classFilho, codigoExibicao, objeto){
     //Definindo Atributo ao objFilho (Class):
     objFilho.setAttribute("class", classFilho);        
 
+	objFilho.innerHTML = idFilho;
     //Inserindo o elemento no pai:
     objPai.appendChild(objFilho);
 
@@ -445,6 +448,7 @@ function addTAGs(idSeletor, tag, idFilho, classFilho, codigoExibicao, objeto){
 	    //Escrevendo algo no filho recém-criado:
 		document.getElementById(idFilho).innerHTML = "ID: "+idFilho+
 													 "<br>Tempo de vida: "+objeto.tempoVida+
+													 "<br>Prioridade: "+objeto.filaPrioridade+
 													 "<br>Tempo Restante:<div id='tR"+idFilho+"'>"+objeto.tempoRestante+"</div>";		
 	}
 }
