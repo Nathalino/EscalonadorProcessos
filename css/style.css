@@ -17,6 +17,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	vertical-align: baseline;
 	background: transparent;
 }
+.posicao{
+    float: left;
+}
 .negrito{
     font-weight: bold;
 }
@@ -39,7 +42,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     float: left;
     clear: none;
     width: 166px;
-    height: 90px;
+    height: auto;
     
     padding: 5px 5px 5px 5px;
     margin-right: 10px;
@@ -214,7 +217,7 @@ footer p{
     float: left;
 }
 #tabelaStatus #nucleo{
-    height: 120px;
+    height: 180px;
     overflow-x: scroll;
     overflow-y: hidden;
 }

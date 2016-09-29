@@ -4,7 +4,7 @@
 var idProcessos = 0;
 var totalProcessadores;
 var totalProcessosIniciais;
-var quantum;
+var quantumBase;
 var executando;
 
 var processador = new Array();
@@ -14,12 +14,18 @@ var filap2 = new Array();
 var filap3 = new Array();
 var filaProntos = new Array();
 
+var quantumFilaPrioridade0;
+var quantumFilaPrioridade1;
+var quantumFilaPrioridade2;
+var quantumFilaPrioridade3;
+
 //CONSTRUTOR
 function consProcesso(){
 	var id;
 	var tempoVida;
 	var tempoRestante;
-	var filaPrioridade;	
+	var filaPrioridade;
+	var quantum;	
 }
 
 
@@ -40,8 +46,8 @@ function acao(){
 		document.getElementById("fnProcessadores").disabled = true;
 
 		//Inserido no HTML o tamanho do Quantum:
-		quantum = document.getElementById("fquantum").value;
-		document.getElementById("Cquantum").innerHTML = quantum;
+		quantumBase = document.getElementById("fquantum").value;
+		document.getElementById("Cquantum").innerHTML = quantumBase;
 
 		//Criando Processos e inserindo na Fila de espera:
 		totalProcessosIniciais = document.getElementById("fnProcessos").value;
@@ -49,7 +55,7 @@ function acao(){
 		
 		//Inserindo elementos no(s) processador(es):
 		totalProcessadores = document.getElementById("fnProcessadores").value;
-		inserirElementoNucleo();
+		inserirElementoProcessador(null, null);
 
 		//Iniciando os processamentos:
 		executando = setInterval("Processador()",1000);
@@ -75,18 +81,15 @@ function acao(){
 		console.log("Fila de Prioridade 3");
 		for(var i=0 ; i<filap3.length; i++){
 			console.log(filap3[i]);	
-		}		
+		}	
+		*/	
 		console.log("/////////////////////");
 		console.log("Fila do Processador");
 		for(var i=0 ; i<processador.length; i++){
 			console.log(processador[i]);	
-		}
-		*/	
-	
+		}	
 		
 	}
-
-
 }
 
 
@@ -96,7 +99,7 @@ function CriacaoProcessos(totalProcessos){
 	for(var x = 0; x<totalProcessos; x++){
 
 		var objetoProcessos = new consProcesso(); 
-		var tempoDeVida = Math.floor((Math.random()*4)+16); //tempo entre 4 e 20.
+		var tempoDeVida = Math.floor((Math.random()*16)+4); //tempo entre 16 e 4.
 		var nFilaPrioridade = Math.floor((Math.random()*4)+0);//tempo entre 3 e 0.
 
 		//Adicionando os elementos no Objeto:
@@ -104,6 +107,21 @@ function CriacaoProcessos(totalProcessos){
 		objetoProcessos.tempoVida = tempoDeVida;
 		objetoProcessos.tempoRestante = tempoDeVida;
 		objetoProcessos.filaPrioridade = nFilaPrioridade;
+
+		//Incrementando o Quantum de acordo com as prioridades:
+		if(nFilaPrioridade == 0){
+			objetoProcessos.quantum = parseInt(quantumBase) + 1;
+		}else{
+			if(nFilaPrioridade == 1){
+				objetoProcessos.quantum = parseInt(quantumBase) + 2;
+			}else{
+				if(nFilaPrioridade == 2){
+					objetoProcessos.quantum = parseInt(quantumBase) + 3;
+				}else{
+					objetoProcessos.quantum = parseInt(quantumBase) + 4;
+				}
+			}
+		}
 		
 		//Inserindo elemento na Fila:
 		inserirElementoFila(objetoProcessos);
@@ -170,21 +188,30 @@ function inserirElementoFila(objeto){
 
 }
 
-//PROCESSADOR:
-function inserirElementoNucleo(){
-	var n = 0;
-	for(var x = 0; x < totalProcessadores; x++){
-		if(n <= 3){
-			var objetoFila = removerElementoFila(n);
-			processador[processador.length] = objetoFila;
-			
-			//Inserindo elemento no HTML:
-			addTAGs("Nprocessos", "div", objetoFila.id, "molder", 2, objetoFila);								
-			n++;
+//PROCESSADOR:                      fp - Fila de Prioridade e pv - Posicao do vetor 
+function inserirElementoProcessador(fp,pv){
 
-		}else{
-			n = 0;
+	if(fp == null){
+		var n = 0;
+		for(var x = 0; x < totalProcessadores; x++){
+			if(n <= 3){
+				var objetoFila = removerElementoFila(n);
+				processador[processador.length] = objetoFila;
+				
+				//Inserindo elemento no HTML:
+				addTAGs("Nprocessos", "div", objetoFila.id, "molder", 2, objetoFila);								
+				n++;
+
+			}else{
+				n = 0;
+			}		
 		}		
+	}else{
+		var objetoFila = removerElementoFila(fp);
+		console.log("Novo Objeto a ser inserido: "+ objetoFila);
+		processador.splice(pv, 0, objetoFila);				
+		//Inserindo elemento no HTML:
+		addTAGs("Nprocessos", "div", objetoFila.id, "molder", 2, objetoFila);								
 	}
 }
 
@@ -194,11 +221,9 @@ function inserirElementoPronto(objeto){
 	objetoProcessos = objeto;
 
 	if(objetoProcessos != null){
-		console.log("(ID)Objeto que será adicionado na fila pronta: "+ objeto.id);
 		filaProntos[filaProntos.length] = objetoProcessos;
 		//Inserindo elemento no HTML:
-		addTAGs("filapronta", "li", objetoProcessos.id, "bordar pronto", 1, null);	
-		
+		addTAGs("filapronta", "li", objetoProcessos.id, "bordar pronto", 1, null);
 	}
 
 }
@@ -283,141 +308,78 @@ var validacao = false;
 	return temp;
 }
 
-function removerElementoProcessador(){
-
-	var objetoProcessos = new consProcesso();
-
-	//Pegando o tamanho do vetor do processador:
-	var ultimaPosicao = processador.length;
-
-	if(ultimaPosicao != 0){
-
-		//Pegando o(s) ultimo dado(s) do vetor processador: 
-		objetoProcessos = processador[ultimaPosicao];
-	 	var FilaPrioridade = processador[ultimaPosicao-1].filaPrioridade;
-
-		//Remover o primeiro elemento do processador:
-		var elementoRemovido = processador.shift();
-		//Retornar o elemento para a fila de espera:
-		inserirElementoFila(elementoRemovido);
-
-		removerTAGs("Nprocessos", elementoRemovido.id);
-
-		var newObjeto;
-
-		//Verifica qual é último processo inserido no processador para verificar a sua fila de prioridade:
-		if(FilaPrioridade == 0){
-			newObjeto = removerElementoFila(1);
-		}else{
-
-			if(FilaPrioridade == 1){
-				newObjeto = removerElementoFila(2);
-			}else{
-				if(FilaPrioridade == 2){
-					newObjeto = removerElementoFila(3);
-				}else{
-					newObjeto = removerElementoFila(0);
-				}
-			}
-		}
-		return newObjeto;
-	}else{
-		return null;
-	}
-
+function removerElementoProcessador(posicao, objeto){
+	processador.splice(posicao, 1);
+	removerTAGs("Nprocessos", objeto.id);
 }
 
 function Processador(){
 
-	var newObjeto;
+	//Condição para parada:
+	if(processador.length != 0){
 
-	if(processador.length != 0 /*|| 
-		filap0.length != 0 ||
-		 filap1.length != 0 ||
-		  filap2.length != 0 ||
-		   filap3.length != 0*/){
 
-		//Condição para o Decremento do Quantum:
-		if(quantum >= 0){
-			var objetoProcessos = new consProcesso();
-			document.getElementById("Cquantum").innerHTML = quantum;
+		for(var i = 0; i<processador.length; i++){
 
-			var tempVida = processador[0].tempoRestante;
-			
-			if(tempVida > 0){
-				tempVida--;
-				processador[0].tempoRestante = tempVida;
-				document.getElementById("tR"+processador[0].id).innerHTML = tempVida;
+			var idCampo = "Quant"+processador[i].id;
+			var idVidaDoProcesso = "tR"+processador[i].id;
 
-			}else{
-				removerTAGs("Nprocessos", processador[0].id);
+			var campoQuantum = document.getElementById(idCampo).innerHTML;
+			var campoVidaDoProcesso = document.getElementById(idVidaDoProcesso).innerHTML;
 
-				//Remover o primeiro elemento da Fila do Processador e tras o proximo elemento a ser inserido no processador.
-				newObjeto = removerElementoProcessador();
-				if(newObjeto != null){
-					//Adiciona o proximo elemento da fila de espera no final do processador.
-					processador.push(newObjeto);
-					//Inserindo elemento no HTML:
-					console.log("ID do novo objeto inserido no processador: "+ newObjeto.id);
-					addTAGs("Nprocessos", "div", newObjeto.id, "molder", 2, newObjeto);
+			if(campoQuantum > 0){
+
+				//Decrementa o Campo do Quantum no processador:
+				campoQuantum = parseInt(campoQuantum)-1;
+				//Insere novamente no html o novo Quantum do processador:
+				document.getElementById(idCampo).innerHTML = campoQuantum;
+
+				//Decrementa o campo Tempo de vida do processador:
+				campoVidaDoProcesso = parseInt(campoVidaDoProcesso)-1;
+				//Insere novamente no html o novo tempo de vida do processador:
+				document.getElementById(idVidaDoProcesso).innerHTML = campoVidaDoProcesso;
+				//Insere no objeto do processador para ser salvo:
+				processador[i].tempoRestante = campoVidaDoProcesso;	
+
+				//Verificando se no campo tempo de vida do processo é igual a 0:
+				if(campoVidaDoProcesso == 0){
+					//Insere na fila de pronto:
+					inserirElementoPronto(processador[i]);
+
+					//Removendo o Processo do Processador:
+					removerElementoProcessador(i, processador[i]);
+
+					//Verificando se as filas de prioridades contem conteudo:
+					if(filap0.length == 1 || 
+						filap1.length == 1 || 
+						 filap2.length == 1 || 
+						  filap3.length == 1){
+
+						var posicaoArrayProcessador = i;
+						inserirElementoProcessador(0, posicaoArrayProcessador);
+
+						console.log("/////////////////////");
+						console.log("Fila do Processador");
+						for(var i=0 ; i<processador.length; i++){
+							console.log(processador[i]);	
+						}						
+
+					}
+
 				}
 
-				console.log("Objeto removido por causa do tempo de vida igual a 0 - Código: "+newObjeto);
-				
-				inserirElementoPronto(newObjeto);
+			}else{
+				console.log("Encerrou");
+				clearInterval(executando);
 			}
 
-			quantum--;
 
-		}else{
-			//O quantum volta a ter o tamanho de origem digitada pelo usuário:
-			quantum = document.getElementById("fquantum").value;
-			document.getElementById("Cquantum").innerHTML = quantum;
-			//Remover o primeiro elemento da Fila do Processador e tras o proximo elemento a ser inserido no processador.
-			newObjeto = removerElementoProcessador();
-			if(newObjeto != null){
-				//Adiciona o proximo elemento da fila de espera no final do processador.
-				processador.push(newObjeto);
-				//Inserindo elemento no HTML:
-				console.log("ID do novo objeto inserido no processador: "+ newObjeto.id);
-				addTAGs("Nprocessos", "div", newObjeto.id, "molder", 2, newObjeto);
-			}
 		}
+
 
 	}else{
 		//Parando de executar o Processador:
-		clearInterval(executando);
-
-		//ProcessadorEmMovimento();// >>>>>>>>>>>>>>>>_ COLOQUEI PRA TESTAR
-		console.log("Fila de Prioridade 0");
-		for(var i=0 ; i<filap0.length; i++){
-			console.log(filap0[i]);	
-		}
-		console.log("/////////////////////");
-		console.log("Fila de Prioridade 1");
-		for(var i=0 ; i<filap1.length; i++){
-			console.log(filap1[i]);	
-		}
-		console.log("/////////////////////");		
-		console.log("Fila de Prioridade 2");
-		for(var i=0 ; i<filap2.length; i++){
-			console.log(filap2[i]);	
-		}
-		console.log("/////////////////////");		
-		console.log("Fila de Prioridade 3");
-		for(var i=0 ; i<filap3.length; i++){
-			console.log(filap3[i]);	
-		}		
-		console.log("/////////////////////");
-		console.log("Fila do Processador");
-		for(var i=0 ; i<processador.length; i++){
-			console.log(processador[i]);	
-		}
-		console.log("/////////////////////");
-		console.log("Fila do Prontas");
-		for(var i=0 ; i<filaProntos.length; i++){
-			console.log(filaProntos[i]);	
-		}		
+		clearInterval(executando);		
 	} 
 	
 }
@@ -437,19 +399,19 @@ function addTAGs(idSeletor, tag, idFilho, classFilho, codigoExibicao, objeto){
     //Definindo Atributo ao objFilho (Class):
     objFilho.setAttribute("class", classFilho);        
 
-	objFilho.innerHTML = idFilho;
     //Inserindo o elemento no pai:
     objPai.appendChild(objFilho);
 
     if(codigoExibicao == 1){
 	    //Escrevendo algo no filho recém-criado:
-		document.getElementById(idFilho).innerHTML = idFilho;
+		objFilho.innerHTML = idFilho;
 	}else{
 	    //Escrevendo algo no filho recém-criado:
-		document.getElementById(idFilho).innerHTML = "ID: "+idFilho+
+		objFilho.innerHTML = "ID: "+idFilho+
 													 "<br>Tempo de vida: "+objeto.tempoVida+
-													 "<br>Prioridade: "+objeto.filaPrioridade+
-													 "<br>Tempo Restante:<div id='tR"+idFilho+"'>"+objeto.tempoRestante+"</div>";		
+													 "<br><span class='posicao'>Tempo Restante: </span><div class='posicao' id='tR"+idFilho+"'>"+objeto.tempoRestante+"</div>"+
+													 "<span class='posicao'>Quantum:</span><div class='posicao' id='Quant"+idFilho+"'> "+objeto.quantum+"</div><br>"+
+													 "<br>Fila: "+objeto.filaPrioridade;		
 	}
 }
 
