@@ -321,6 +321,9 @@ function Processador(){
 
 		for(var i = 0; i<processador.length; i++){
 
+			var proximaFilaPrioridade = ultimaPosicaoFilaPrioridade();
+			console.log("Próxima fila de Prioridade a ser inserida: "+proximaFilaPrioridade);
+
 			var idCampo = "Quant"+processador[i].id;
 			var idVidaDoProcesso = "tR"+processador[i].id;
 
@@ -350,13 +353,13 @@ function Processador(){
 					removerElementoProcessador(i, processador[i]);
 
 					//Verificando se as filas de prioridades contem conteudo:
-					if(filap0.length == 1 || 
-						filap1.length == 1 || 
-						 filap2.length == 1 || 
-						  filap3.length == 1){
+					if(filap0.length >= 1 || 
+						filap1.length >= 1 || 
+						 filap2.length >= 1 || 
+						  filap3.length >= 1){
 
 						var posicaoArrayProcessador = i;
-						inserirElementoProcessador(0, posicaoArrayProcessador);
+						inserirElementoProcessador(proximaFilaPrioridade, posicaoArrayProcessador);
 
 						console.log("/////////////////////");
 						console.log("Fila do Processador");
@@ -441,5 +444,13 @@ function validacaoCampos(nomeCampo, textoImpressao){
 	}
 }
 
-
+function ultimaPosicaoFilaPrioridade(){
+	var tamanho = processador.length;
+	if(tamanho > 0){
+		var posicao = processador[tamanho-1].filaPrioridade;
+		return posicao;
+	}else{
+		return 0;
+	}
+}
 
