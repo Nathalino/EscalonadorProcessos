@@ -32,6 +32,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 .pronto{
     color: #660066;
 }
+.adicionado{
+    color: #B20000;
+}
 .molder{
     font-family: Arial, sans-serif;
     text-align: left;
