@@ -2,7 +2,7 @@
 
 //Variaveis Globais:
 var idProcessos = 0;
-var fpp = 0;
+var fpp = -1;
 var totalProcessadores;
 var totalProcessosIniciais;
 var quantumBase;
@@ -365,7 +365,7 @@ function Processador(){
 					}
 				}
 			}else{
-				
+
 				var proximaFilaPrioridade = ultimaPosicaoFilaPrioridade();
 				var objetoProcesso = processador[i];
 				var posicao = i;
