@@ -318,11 +318,9 @@ function Processador(){
 	//Condição para parada:
 	if(processador.length != 0){
 
-
 		for(var i = 0; i<processador.length; i++){
 
 			var proximaFilaPrioridade = ultimaPosicaoFilaPrioridade();
-			console.log("Próxima fila de Prioridade a ser inserida: "+proximaFilaPrioridade);
 
 			var idCampo = "Quant"+processador[i].id;
 			var idVidaDoProcesso = "tR"+processador[i].id;
@@ -366,14 +364,16 @@ function Processador(){
 						for(var i=0 ; i<processador.length; i++){
 							console.log(processador[i]);	
 						}						
-
 					}
-
 				}
-
 			}else{
-				console.log("Encerrou");
-				clearInterval(executando);
+
+				var objetoProcesso = processador[i];
+				var posicao = i;
+				removerElementoProcessador(i, processador[i]);
+				inserirElementoFila(objetoProcesso);
+				inserirElementoProcessador(proximaFilaPrioridade, posicao);
+
 			}
 
 
