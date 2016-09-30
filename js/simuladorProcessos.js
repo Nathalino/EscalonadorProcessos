@@ -319,8 +319,6 @@ function Processador(){
 
 		for(var i = 0; i<processador.length; i++){
 
-			var proximaFilaPrioridade = ultimaPosicaoFilaPrioridade();
-
 			var idCampo = "Quant"+processador[i].id;
 			var idVidaDoProcesso = "tR"+processador[i].id;
 
@@ -355,6 +353,7 @@ function Processador(){
 						 filap2.length >= 1 || 
 						  filap3.length >= 1){
 
+						var proximaFilaPrioridade = ultimaPosicaoFilaPrioridade();
 						var posicaoArrayProcessador = i;
 						inserirElementoProcessador(proximaFilaPrioridade, posicaoArrayProcessador);
 
@@ -366,7 +365,8 @@ function Processador(){
 					}
 				}
 			}else{
-
+				
+				var proximaFilaPrioridade = ultimaPosicaoFilaPrioridade();
 				var objetoProcesso = processador[i];
 				var posicao = i;
 				removerElementoProcessador(i, processador[i]);
