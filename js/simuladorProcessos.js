@@ -2,6 +2,7 @@
 
 //Variaveis Globais:
 var idProcessos = 0;
+var fpp = 0;
 var totalProcessadores;
 var totalProcessosIniciais;
 var quantumBase;
@@ -126,9 +127,7 @@ function CriacaoProcessos(totalProcessos){
 		//Inserindo elemento na Fila:
 		inserirElementoFila(objetoProcessos);
 		idProcessos++;
-
 	}
-
 }
 
 
@@ -373,18 +372,12 @@ function Processador(){
 				removerElementoProcessador(i, processador[i]);
 				inserirElementoFila(objetoProcesso);
 				inserirElementoProcessador(proximaFilaPrioridade, posicao);
-
 			}
-
-
 		}
-
-
 	}else{
 		//Parando de executar o Processador:
 		clearInterval(executando);		
 	} 
-	
 }
 
 
@@ -445,12 +438,12 @@ function validacaoCampos(nomeCampo, textoImpressao){
 }
 
 function ultimaPosicaoFilaPrioridade(){
-	var tamanho = processador.length;
-	if(tamanho > 0){
-		var posicao = processador[tamanho-1].filaPrioridade;
-		return posicao;
+	if(fpp == 3){
+		fpp = 0;
 	}else{
-		return 0;
+		fpp++;
 	}
+	console.log("Fila de Prioridade: "+ fpp);
+	return fpp;
 }
 
