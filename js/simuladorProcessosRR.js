@@ -66,7 +66,6 @@ function acao(){
 		executando = setInterval("Processador()",1000);
 				
 		/*
-		//ProcessadorEmMovimento();// >>>>>>>>>>>>>>>>_ COLOQUEI PRA TESTAR
 		console.log("Fila de Prioridade 0");
 		for(var i=0 ; i<filap0.length; i++){
 			console.log(filap0[i]);	
@@ -252,7 +251,7 @@ function inserirElementoFila(objeto, btAdicionar){
 
 }
 
-//PROCESSADOR:                      fp - Fila de Prioridade e pv - Posicao do vetor 
+//INSERIR ELEMENTO NO PROCESSADOR:  fp - Fila de Prioridade e pv - Posicao do vetor 
 function inserirElementoProcessador(fp,pv){
 
 	if(fp == null){
@@ -260,11 +259,14 @@ function inserirElementoProcessador(fp,pv){
 		for(var x = 0; x < totalProcessadores; x++){
 			if(n <= 3){
 				var objetoFila = removerElementoFila(n);
-				processador[processador.length] = objetoFila;
+
+				if(objetoFila != null){
+					processador[processador.length] = objetoFila;
 				
-				//Inserindo elemento no HTML:
-				addTAGs("Nprocessos", "div", objetoFila.id, "molder", 2, objetoFila);								
-				n++;
+					//Inserindo elemento no HTML:
+					addTAGs("Nprocessos", "div", objetoFila.id, "molder", 2, objetoFila);								
+					n++;
+				}
 
 			}else{
 				n = 0;
@@ -293,7 +295,7 @@ function inserirElementoPronto(objeto){
 }
 
 
-//REMOVENDO PRIMEIRO ELEMENTO DA FILA DE PRIORIDADE E RETORNANDO O PRIMEIRO ELEMENTO DA FILA:
+//REMOVENDO O(s) PRIMEIRO(s) ELEMENTO(s) DA FILA DE PRIORIDADE E RETORNANDO O PRIMEIRO ELEMENTO DA FILA:
 function removerElementoFila(numero){
 
 var temp = null;
@@ -303,10 +305,8 @@ var validacao = false;
 		switch(numero){
 				
 				case 0:
-					//console.log("entrou case 0");
 					if(filap0[0] == null){
 						numero = 1;
-						//console.log("Foi para o caso 1");
 					}else{
 						temp = filap0[0];
 						removerTAGs("filap"+numero, temp.id);
@@ -316,10 +316,8 @@ var validacao = false;
 				break;
 				
 				case 1:
-					//console.log("entrou case 1");
 					if(filap1[0] == null){
 						numero = 2;
-						//console.log("Foi para o caso 2");
 					}else{
 						temp = filap1[0];
 						removerTAGs("filap"+numero, temp.id);
@@ -329,10 +327,8 @@ var validacao = false;
 				break;
 
 				case 2:
-					//console.log("entrou case 2");
 					if(filap2[0] == null){
 						numero = 3;
-						//console.log("Foi para o caso 3");
 					}else{
 						temp = filap2[0];
 						removerTAGs("filap"+numero, temp.id);
@@ -342,10 +338,8 @@ var validacao = false;
 				break;
 
 				case 3:
-					//console.log("entrou case 3");
 					if(filap3[0] == null){
 						numero = 4;
-						//console.log("Foi para o caso 4");
 					}else{
 						temp = filap3[0];
 						removerTAGs("filap"+numero, temp.id);
@@ -355,7 +349,6 @@ var validacao = false;
 				break;
 
 				case 4:
-					//console.log("entrou case 4");
 					if(filap0[0] == null &&	filap1[0] == null && filap2[0] == null && filap3[0] == null){
 						validacao = true;
 					}else{
@@ -372,11 +365,15 @@ var validacao = false;
 	return temp;
 }
 
+
+//REMOVENDO ELEMENTO DO PROCESSADOR:
 function removerElementoProcessador(posicao, objeto){
 	processador.splice(posicao, 1);
 	removerTAGs("Nprocessos", objeto.id);
 }
 
+
+//PROCESSADOR:
 function Processador(){
 
 	//Condição para parada:
@@ -514,6 +511,8 @@ function validacaoCampos(nomeCampo, textoImpressao){
 	}
 }
 
+
+//ULTIMA POSICAO DA FILA DE PRIORIDADE
 function ultimaPosicaoFilaPrioridade(){
 	if(fpp == 3){
 		fpp = 0;
@@ -523,4 +522,3 @@ function ultimaPosicaoFilaPrioridade(){
 	console.log("Fila de Prioridade: "+ fpp);
 	return fpp;
 }
-

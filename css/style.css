@@ -52,12 +52,50 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     
     border-radius: 2px;
 }
+.molder1{
+    font-family: Arial, sans-serif;
+    text-align: left;
+    color: #fff;
+    
+    background-color: #00175E;
+    
+    float: left;
+    clear: none;
+    width: 180px;
+    height: auto;
+    
+    padding: 5px 5px 5px 5px;
+    margin-right: 10px;
+    
+    border-radius: 2px;
+}
+.molderProcesso{
+    font-family: Arial, sans-serif;
+    text-align: left;
+    color: #000;
+    
+    background-color: #FFC0B9;
+    
+    float: left;
+    clear: none;
+    width: 190px;
+    height: auto;
+    
+    padding: 5px 5px 5px 5px;
+    margin-right: 10px;
+    
+    border-radius: 2px;
+}
 .bordar{
     border-right: solid #242415 2px;
 }
 
 .campoQuantum{
     width: 36px;
+}
+.campoTempo{
+    width: 100px;
+    height: 26px;
 }
 
 body{
@@ -232,3 +270,13 @@ footer p{
     overflow-x: scroll;
     overflow-y: hidden
 }
+#tabelaStatus #deadLine{
+    height: 150px;
+    overflow-x: scroll;
+    overflow-y: hidden;    
+}
+#tabelaStatus #deadLine #NDeadLine{
+    display: block;
+    width: 15000px;
+}
+
