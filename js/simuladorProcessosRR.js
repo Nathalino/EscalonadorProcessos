@@ -275,9 +275,15 @@ function inserirElementoProcessador(fp,pv){
 	}else{
 		var objetoFila = removerElementoFila(fp);
 		console.log("Novo Objeto a ser inserido: "+ objetoFila);
-		processador.splice(pv, 0, objetoFila);				
-		//Inserindo elemento no HTML:
-		addTAGs("Nprocessos", "div", objetoFila.id, "molder", 2, objetoFila);								
+		processador.splice(pv, 0, objetoFila);
+
+		for(var y=0; y < processador.length; y++){
+			removerTAGs("Nprocessos", processador[y].id);
+		}
+		for(var w=0; w < processador.length; w++){				
+			//Inserindo elemento no HTML:
+			addTAGs("Nprocessos", "div", processador[w].id, "molder", 2, processador[w]);	
+		}							
 	}
 }
 
@@ -499,6 +505,24 @@ function removerTAGs(idSeletor, idfilho) {
     	var removido = objPai.removeChild(objFilho);
     }
 }
+
+
+function addTAGsLocalEspecifico(tagPosterior, idFilho, classes, objeto){
+
+	var idTag = "#x"+tagPosterior;
+	console.log("Antes do id:"+idTag);
+	var elemento = document.querySelector(idTag);
+
+	var elementoInserir = "<div id='x"+idFilho+"' class='"+classes+"'>"+
+							"ID: "+idFilho+
+							"<br>Tempo de vida: "+objeto.tempoVida+
+							"<br><span class='posicao'>Tempo Restante: </span><div class='posicao' id='tR"+idFilho+"'>"+objeto.tempoRestante+"</div>"+
+							"<span class='posicao'>Quantum:</span><div class='posicao' id='Quant"+idFilho+"'> "+objeto.quantum+"</div><br>"+
+							"<br>Fila: "+objeto.filaPrioridade;
+
+	elemento.insertAdjacentHTML('beforebegin', elementoInserir);
+}
+
 
 //VALIDACAO DOS CAMPOS DO FORMULÁRIO:
 function validacaoCampos(nomeCampo, textoImpressao){
