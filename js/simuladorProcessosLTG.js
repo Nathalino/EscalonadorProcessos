@@ -6,6 +6,7 @@ var fpp = -1;
 var totalProcessadores;
 var totalProcessosIniciais;
 var executando;
+var idAddProcesso;
 
 var processador = new Array();
 var filaEspera = new Array();
@@ -60,28 +61,30 @@ function acao(){
 		inserirElementoProcessador(null);
 
 		//Iniciando os processamentos:
-		executando = setInterval("Processador()",1000);
-
-		/*
-		//FILA DE ESPERA
-		console.log("Fila Espera");
-		for(var n = 0; n<filaEspera.length; n++){
-			console.log(filaEspera[n]);
-		}
-		console.log("/////////////////////");
-		//PROCESSADOR
-		console.log("Fila Processador");
-		for(var n = 0; n<processador.length; n++){
-			console.log(processador[n]);
-		}
-		*/
-				
+		executando = setInterval("Processador()",1000);				
 	}
 }
 
 
 //BOTÃO ADICIONAR PROCESSOS:
 function btAdicionarProcessos(){
+	CriacaoProcessos(null, 1);
+	auxiliar = mergeSort(filaEspera);
+	filaEspera = auxiliar
+
+	for(var k=0; k<filaEspera.length; k++){
+		removerTAGs("NDeadLine", filaEspera[k].id);
+	}
+
+	for(var r=0; r<filaEspera.length; r++){
+		if(idAddProcesso == filaEspera[r].id){
+			//Inserindo elemento no HTML:
+			addTAGs("NDeadLine", "div", filaEspera[r].id, "molderProcessoAdd", 2, filaEspera[r]);			
+		}else{
+			//Inserindo elemento no HTML:
+			addTAGs("NDeadLine", "div", filaEspera[r].id, "molderProcesso", 2, filaEspera[r]);			
+		}
+	}
 }
 
 
@@ -108,7 +111,20 @@ function CriacaoProcessos(totalProcessos, tipo){
 		}	
 
 	}else{
+			var objetoProcessos = new consProcesso(); 
+			var tempoExec = Math.floor((Math.random()*20)+1); //tempo entre 20 e 0.
+			var deadline = Math.floor((Math.random()*17)+4); //tempo entre 20 e 4.
 
+			//Adicionando os elementos no Objeto:
+			objetoProcessos.id = idProcessos;
+			objetoProcessos.tempoExecucao = tempoExec;
+			objetoProcessos.tempoRestante = tempoExec;
+			objetoProcessos.deadLine = deadline;
+		
+			//Inserindo elemento na Fila:
+			inserirElementoEspera(objetoProcessos);
+			idAddProcesso = idProcessos;
+			idProcessos++;		
 	}
 }
 
@@ -136,8 +152,14 @@ function inserirElementoProcessador(pv){
 	}else{
 		var objeto = removerElementoEspera(null, null);
 		processador.splice(pv, 0, objeto);
-		//Inserindo elemento no HTML:
-		addTAGs("Nprocessos", "div", objeto.id, "molder1", 2, objeto);
+		//Remove todos os elementos no HTML:
+		for(var w=0; w<processador.length; w++){
+			removerTAGs("Nprocessos", processador[w].id);
+		}
+		//Inserindo todos os elemento no HTML:
+		for(var z=0; z<processador.length; z++){
+			addTAGs("Nprocessos", "div", processador[z].id, "molder1", 2, processador[z]);
+		}
 	}
 
 }
@@ -155,7 +177,7 @@ function inserirElementoExecutado(objeto){
 function inserirElementoAbortado(objeto){
 	filaAbortado[filaAbortado.length] = objeto;
 	//Inserindo elemento no HTML:
-	addTAGs("filaAbortada", "li", objeto.id, "bordar espera negrito", 1, null);
+	addTAGs("filaAbortada", "li", objeto.id, "bordar abortado negrito", 1, null);
 }
 
 
@@ -163,8 +185,12 @@ function inserirElementoAbortado(objeto){
 function removerElementoEspera(posicao, objeto){
 	if(posicao == null){
 		var objeto = filaEspera.shift();
-		removerTAGs("NDeadLine", objeto.id);
-		return objeto; 
+		if(objeto != null){
+			removerTAGs("NDeadLine", objeto.id);
+			return objeto;
+		}else{
+			return null;
+		} 
 	}else{
 		filaEspera.splice(posicao,1);
 		removerTAGs("NDeadLine", objeto.id);
@@ -194,6 +220,14 @@ function Processador(){
 
 				CampoTempoRestante = parseInt(CampoTempoRestante)-1;
 				document.getElementById(idCampo).innerHTML = CampoTempoRestante;
+				processador[i].tempoRestante = CampoTempoRestante;
+
+				//Verificando se o processador tem espaço vazio e tem processos:
+				for(var y = totalProcessadores; y > processador.length; y--){
+					if(filaEspera.length >= 1){
+						inserirElementoProcessador(i);
+					}
+				}
 
 			}else{
 				//Inseri o elemento na fila de Executados:
@@ -216,6 +250,7 @@ function Processador(){
 
 				CampoDeadLine = parseInt(CampoDeadLine)-1;
 				document.getElementById(idCampo2).innerHTML = CampoDeadLine;
+				filaEspera[z].deadLine = CampoDeadLine;
 
 			}else{
 				//Inseri o elemento na fila de Abortados:
@@ -346,6 +381,7 @@ function DesenhaElementoOrdenadoEspera(){
 	
 }
 
+//Cronometro:
 function tempo(){	
 
    if (segundo < 59){

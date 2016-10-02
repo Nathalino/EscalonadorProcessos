@@ -35,6 +35,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 .adicionado{
     color: #B20000;
 }
+.abortado{
+    color: #FF9999;
+}
 .molder{
     font-family: Arial, sans-serif;
     text-align: left;
@@ -75,6 +78,23 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     color: #000;
     
     background-color: #FFC0B9;
+    
+    float: left;
+    clear: none;
+    width: 190px;
+    height: auto;
+    
+    padding: 5px 5px 5px 5px;
+    margin-right: 10px;
+    
+    border-radius: 2px;
+}
+.molderProcessoAdd{
+    font-family: Arial, sans-serif;
+    text-align: left;
+    color: #000;
+    
+    background-color: #FF1A1A;
     
     float: left;
     clear: none;
