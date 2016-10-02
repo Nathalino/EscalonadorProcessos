@@ -157,15 +157,19 @@ function CriacaoProcessos(totalProcessos, tipo){
 
 			//Incrementando o Quantum de acordo com as prioridades:
 			if(nFilaPrioridade == 0){
-				objetoProcessos.quantum = parseInt(quantumBase) + 1;
+				quantumFilaPrioridade0 = parseInt(quantumBase) + 1;
+				objetoProcessos.quantum = quantumFilaPrioridade0;
 			}else{
 				if(nFilaPrioridade == 1){
-					objetoProcessos.quantum = parseInt(quantumBase) + 2;
+					quantumFilaPrioridade1 = parseInt(quantumBase) + 2;
+					objetoProcessos.quantum = quantumFilaPrioridade1;
 				}else{
 					if(nFilaPrioridade == 2){
-						objetoProcessos.quantum = parseInt(quantumBase) + 3;
+						quantumFilaPrioridade2 = parseInt(quantumBase) + 3;
+						objetoProcessos.quantum = quantumFilaPrioridade2;
 					}else{
-						objetoProcessos.quantum = parseInt(quantumBase) + 4;
+						quantumFilaPrioridade3 = parseInt(quantumBase) + 4;
+						objetoProcessos.quantum = quantumFilaPrioridade3;
 					}
 				}
 			}
@@ -410,7 +414,22 @@ function Processador(){
 				//Insere novamente no html o novo tempo de vida do processador:
 				document.getElementById(idVidaDoProcesso).innerHTML = campoVidaDoProcesso;
 				//Insere no objeto do processador para ser salvo:
-				processador[i].tempoRestante = campoVidaDoProcesso;	
+				processador[i].tempoRestante = campoVidaDoProcesso;
+
+				//Verificando se o processador tem espaço vazio e tem processos:
+				for(var w = totalProcessadores; w > processador.length; w--){
+
+					console.log("Total de núcleos: "+totalProcessadores+"> Tamanho do processador: "+processador.length);
+					if(filap0.length >= 1 || 
+						filap1.length >= 1 || 
+						 filap2.length >= 1 || 
+						  filap3.length >= 1){
+
+						var proximaFilaPrioridade = ultimaPosicaoFilaPrioridade();
+						inserirElementoProcessador(proximaFilaPrioridade, processador.length);
+					}
+
+				}	
 
 				//Verificando se no campo tempo de vida do processo é igual a 0:
 				if(campoVidaDoProcesso == 0){
@@ -441,17 +460,20 @@ function Processador(){
 
 				if(processador[i].filaPrioridade == 0){
 					processador[i].quantum = quantumFilaPrioridade0;
-				}else{
-					if(processador[i].filaPrioridade == 1){
-						processador[i].quantum = quantumFilaPrioridade1;
-					}else{
-						if(processador[i].filaPrioridade == 2){
-							processador[i].quantum = quantumFilaPrioridade2;
-						}else{
-							processador[i].quantum = quantumFilaPrioridade3;
-						}
-					}
 				}
+				
+				if(processador[i].filaPrioridade == 1){
+					processador[i].quantum = quantumFilaPrioridade1;
+				}
+				
+				if(processador[i].filaPrioridade == 2){
+					processador[i].quantum = quantumFilaPrioridade2;
+				}
+				
+				if(processador[i].filaPrioridade == 3){
+					processador[i].quantum = quantumFilaPrioridade3;
+				}
+				
 
 				var proximaFilaPrioridade = ultimaPosicaoFilaPrioridade();
 				var objetoProcesso = processador[i];
