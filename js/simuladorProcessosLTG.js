@@ -2,7 +2,6 @@
 
 //Variaveis Globais:
 var idProcessos = 0;
-var fpp = -1;
 var totalProcessadores;
 var totalProcessosIniciais;
 var executando;
@@ -184,13 +183,27 @@ function inserirElementoAbortado(objeto){
 //REMOVENDO PRIMEIRO ELEMENTO DA FILA DE PRIORIDADE E RETORNANDO O PRIMEIRO ELEMENTO DA FILA:
 function removerElementoEspera(posicao, objeto){
 	if(posicao == null){
-		var objeto = filaEspera.shift();
+
+		var objeto = new consProcesso();
+
+		do{
+			objeto = filaEspera.shift();
+			
+			if(objeto.deadLine == 0){
+				//Inseri o elemento na fila de Abortados:
+				inserirElementoAbortado(objeto);
+				removerTAGs("NDeadLine", objeto.id);				
+			}
+
+		}while(objeto.deadLine == 0);
+
 		if(objeto != null){
 			removerTAGs("NDeadLine", objeto.id);
 			return objeto;
 		}else{
 			return null;
 		} 
+
 	}else{
 		filaEspera.splice(posicao,1);
 		removerTAGs("NDeadLine", objeto.id);
