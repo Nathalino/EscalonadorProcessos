@@ -278,6 +278,7 @@ function inserirElementoProcessador(fp,pv){
 
 			}else{
 				n = 0;
+				x--;
 			}		
 		}		
 	}else{
